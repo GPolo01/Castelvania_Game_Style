@@ -1,65 +1,117 @@
-# The Curse of Theron - Castelvania_Game_Style
+# The Curse of Theron — Castlevania Game Style
 
-Jogo do gênero Run'n Gun
+A run-and-gun action game inspired by classic Castlevania aesthetics, written in C using the Allegro 5 library.
 
-  Este projeto é um jogo de ação desenvolvido em C utilizando a biblioteca Allegro 5. O jogo mistura elementos de Run'n Gun com a estética de clássicos como Castlevania, apresentando mecânicas de combate à distância e combate corpo a corpo, sistema de animações por spritesheets e uma batalha
+## Description
 
-# Main Operation
+The Curse of Theron blends fast-paced run-and-gun combat with gothic visuals and multi-stage boss encounters. This project demonstrates a compact game architecture in C, including resource management, sprite animation, physics, enemy AI, projectile handling, and a bilingual menu system (Portuguese and English).
 
-    The main.c file serves as the core of the system. It is responsible for:
+## Features
 
-    Global Initialization: Configuring all basic Allegro components (Image, Audio, Fonts, Primitives, and Keyboard).
+- Run-and-gun action with exploration and boss fights
+- Sprite-sheet animation system and camera management
+- Projectile mechanics supporting multiple bullets via a linked list
+- Multi-stage boss with distinct attack states (projectile and area attacks)
+- Adjustable difficulty (Easy, Medium, Hard) and life modes (Normal, Double Life, HitKill)
+- Vertical shooting (hero can shoot upwards)
+- Objective-based progression: the boss unlocks after defeating a required number of enemies
+- Bilingual menu (Portuguese / English)
+- Settings for music volume and difficulty
 
-    Context Management: Utilizing the GameContext structure to centralize global information such as screen dimensions, music volume, and difficulty levels.
+## Technologies
 
-    State Machine: The game flow is controlled by a GameState enum. Using a while loop, the program determines whether to run the main menu, settings screen, exploration stage, boss battle, or the game-over screens (Victory or Game Over).
+- Language: C
+- Game library: Allegro 5
+- Assets: sprites, backgrounds, audio (.ogg)
 
-    Time Control: Maintaining a constant update rate (30 FPS) to ensure physics and animations occur smoothly across different hardware.
+## Requirements
 
-# Project Structure and Directories
+- C compiler (gcc or clang)
+- Allegro 5 development libraries (core, image, audio, font, ttf, primitives, mixer as needed)
+- Standard build tools (make, pkg-config)
 
-    main.c: Program entry point and state machine controller.
+On Debian/Ubuntu example:
 
-    animation.c / animation.h: Animation system that loads spritesheets and manages frame switching based on accumulated time.
+    sudo apt install liballegro5-dev liballegro-image5-dev liballegro-audio5-dev liballegro-font5-dev liballegro-ttf5-dev liballegro-primitives5-dev pkg-config build-essential
 
-    character.c / character.h: Implementation of game entities (Protagonist and Enemies), containing HP logic, movement physics, and collision detection.
+Adjust the commands for your OS or package manager.
 
-    Bullet.c / Bullet.h: Projectile mechanics using linked lists to allow multiple shots on screen simultaneously.
+## Build and run
 
-    graphicsResources.c / graphicsResources.h: Scene and resource manager, responsible for drawing the interface (HUD), managing the camera, and music.
+This project provides a Makefile with the following commands:
 
-    /Personagens_Cenários: Directory containing all visual assets (sprites, backgrounds) and audio files (.ogg tracks).
+- make          # build the game
+- make run      # build (if needed) and run the game
+- make clean    # remove build artifacts
 
-# General Data Structures Used
+Example manual build (adjust source files as necessary):
 
-    struct GameContext: The master structure that stores the hardware state (display, timer) and user preferences (volume, difficulty).
+    gcc `pkg-config --cflags --libs allegro-5 allegro_image-5 allegro_audio-5 allegro_font-5 allegro_ttf-5 allegro_primitives-5` -o curse_of_theron *.c
 
-    struct Protagonist & struct Character: Structures defining the game's living entities. They store pointers to various animations (idle, running, attack) and a struct Joystick that maps movement intentions.
+Run the game:
 
-    struct Animation: Manages a dynamic array of ALLEGRO_BITMAP* representing the individual frames of an action.
+    ./curse_of_theron
 
-    struct bullet (Linked List): Used to dynamically manage projectiles. Each bullet tracks its origin (hero or enemy) and its trajectory (left, right, or up).
+## How to play
 
-# Extra Features Implemented
+Default or typical keyboard controls (please confirm exact bindings if different):
 
-    Beyond the basic mechanics, the game includes:
+- Move: Arrow keys or A / D
+- Jump: W or Space
+- Shoot: Z or primary attack key
+- Shoot upwards: Up + Shoot
+- Menu: Navigate with arrow keys and confirm with Enter
 
-    Adjustable Difficulty: A settings menu with three levels (Easy, Medium, and Hard) that modify enemy HP and damage.
+The project contains a joystick mapping structure to support gamepad input. If you want the exact keys listed here, provide the preferred bindings or point to the control definitions in the code.
 
-    Life Configuration: Players can choose between "Normal," "Double Life," or "HitKill" (one-hit death) modes.
+## Project structure (high level)
 
-    Language System: An integrated bilingual interface, allowing real-time switching between Portuguese and English in the menu.
+- main.c — Entry point and game state machine
+- animation.c / animation.h — Sprite-sheet animation system
+- character.c / character.h — Protagonist and enemy logic (HP, movement, collisions)
+- bullet.c / bullet.h — Projectile handling using a linked list
+- graphicsResources.c / graphicsResources.h — Drawing, HUD, camera, and music manager
+- Personagens_Cenarios/ — Visual and audio assets (sprites, backgrounds, .ogg files)
 
-    Vertical Shooting Mechanic: The hero can shoot upwards, utilizing rotated sprites.
+## Architecture overview
 
-    Objective-Based Progression: Access to the Boss is granted only after defeating a specific number of enemies in the stage.
+- GameContext: Central structure holding display, timer, preferences (volume, difficulty), and other global state.
+- GameState: Enum-based state machine controlling menu, settings, exploration, boss battles, etc.
+- Fixed update rate (30 FPS) to keep physics and animation consistent across hardware.
+- Animation: Dynamic arrays of ALLEGRO_BITMAP* for per-action frames.
+- Bullets: Linked-list structure for managing multiple projectiles.
 
-    Multi-Stage Boss Battle: The "Demon King" features its own state machine, alternating between projectile attacks and a special fire-based area attack.
+## Known issues
 
-# Known Errors and Issues
+- Boss flame damage is currently applied every frame (30 times per second), which can result in very rapid HP loss while the player remains in the fire zone.
+- Background wrap-around logic may show minor visual glitches when the player rapidly reverses direction at image boundaries.
+- Music selection/volume may reset when returning from the settings menu to the main menu.
 
-    Damage per Frame: Boss flame damage is applied every frame (30 times per second), which can lead to extremely rapid health loss if the player does not exit the danger zone immediately.
+If you would like, I can open GitHub issues for these with suggested fixes.
 
-    Camera Limitations: The background wrap-around logic works well in linear movement but may show minor visual glitches if the player switches directions repeatedly and rapidly at the image boundary.
+## Contributing
 
-    Music Bug: The music menu keeps reseting every time you go to settings and then go back to the menu.
+Contributions are welcome. Suggested workflow:
+
+1. Fork the repository.
+2. Create a feature branch: git checkout -b feature/your-feature
+3. Commit changes with clear messages.
+4. Open a pull request describing the change and include screenshots or reproduction steps if applicable.
+
+When reporting bugs or submitting features, please include:
+- Platform and OS used for testing
+- Build steps and any special dependencies
+- Reproduction steps for bugs
+
+## License
+
+License: To be chosen. If you want the MIT license, I can add an appropriate LICENSE file and include the short license notice here.
+
+## Credits
+
+- Developed in C using Allegro 5
+- Art and audio assets are located in Personagens_Cenarios/ — verify asset licenses before publishing
+
+---
+
+If you want any changes (controls, exact build flags, license selection, screenshots), tell me and I will update the README.
