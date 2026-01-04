@@ -34,14 +34,12 @@ On Debian/Ubuntu example:
 
     sudo apt install liballegro5-dev liballegro-image5-dev liballegro-audio5-dev liballegro-font5-dev liballegro-ttf5-dev liballegro-primitives5-dev pkg-config build-essential
 
-Adjust the commands for your OS or package manager.
-
 ## Build and run
 
 This project provides a Makefile with the following commands:
 
 - make          # build the game
-- make run      # build (if needed) and run the game
+- make run      # build and run the game
 - make clean    # remove build artifacts
 
 Example manual build (adjust source files as necessary):
@@ -56,10 +54,13 @@ Run the game:
 
 Default or typical keyboard controls (please confirm exact bindings if different):
 
-- Move: Arrow keys or A / D
-- Jump: W or Space
-- Shoot: Z or primary attack key
+- Move: Arrow keys
+- Jump: Space
+- Shoot: G
 - Shoot upwards: Up + Shoot
+- Pause: P
+- Quit: Esc in the menu
+- Reset: Esc during the game
 - Menu: Navigate with arrow keys and confirm with Enter
 
 The project contains a joystick mapping structure to support gamepad input. If you want the exact keys listed here, provide the preferred bindings or point to the control definitions in the code.
@@ -87,31 +88,9 @@ The project contains a joystick mapping structure to support gamepad input. If y
 - Background wrap-around logic may show minor visual glitches when the player rapidly reverses direction at image boundaries.
 - Music selection/volume may reset when returning from the settings menu to the main menu.
 
-If you would like, I can open GitHub issues for these with suggested fixes.
-
-## Contributing
-
-Contributions are welcome. Suggested workflow:
-
-1. Fork the repository.
-2. Create a feature branch: git checkout -b feature/your-feature
-3. Commit changes with clear messages.
-4. Open a pull request describing the change and include screenshots or reproduction steps if applicable.
-
-When reporting bugs or submitting features, please include:
-- Platform and OS used for testing
-- Build steps and any special dependencies
-- Reproduction steps for bugs
-
-## License
-
-License: To be chosen. If you want the MIT license, I can add an appropriate LICENSE file and include the short license notice here.
 
 ## Credits
 
 - Developed in C using Allegro 5
 - Art and audio assets are located in Personagens_Cenarios/ — verify asset licenses before publishing
 
----
-
-If you want any changes (controls, exact build flags, license selection, screenshots), tell me and I will update the README.
