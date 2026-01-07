@@ -2,6 +2,9 @@
 
 A run-and-gun action game inspired by classic Castlevania aesthetics, written in C using the Allegro 5 library.
 
+<img width="1920" height="1075" alt="image" src="https://github.com/user-attachments/assets/d1d42807-dbc7-455c-8602-0e2780119080" />
+
+
 ## Description
 
 The Curse of Theron blends fast-paced run-and-gun combat with gothic visuals and multi-stage boss encounters. This project demonstrates a compact game architecture in C, including resource management, sprite animation, physics, enemy AI, projectile handling, and a bilingual menu system (Portuguese and English).
