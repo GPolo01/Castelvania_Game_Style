@@ -18,7 +18,7 @@ The Curse of Theron blends fast-paced run-and-gun combat with gothic visuals and
 - Bilingual menu (Portuguese / English)
 - Settings for music volume and difficulty
 
-## Technologies
+## Languade use
 
 - Language: C
 - Game library: Allegro 5
@@ -65,7 +65,7 @@ Default or typical keyboard controls (please confirm exact bindings if different
 
 The project contains a joystick mapping structure to support gamepad input. If you want the exact keys listed here, provide the preferred bindings or point to the control definitions in the code.
 
-## Project structure (high level)
+## Project structure
 
 - main.c — Entry point and game state machine
 - animation.c / animation.h — Sprite-sheet animation system
@@ -92,5 +92,5 @@ The project contains a joystick mapping structure to support gamepad input. If y
 ## Credits
 
 - Developed in C using Allegro 5
-- Art and audio assets are located in Personagens_Cenarios/ — verify asset licenses before publishing
+- Art and audio assets are located in Personagens_Cenarios/
 
